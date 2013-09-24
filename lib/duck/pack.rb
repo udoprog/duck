@@ -39,7 +39,7 @@ module Duck
       Dir.chdir @target
       if @strip
         log.info "Stripping contents of #{@target}"
-        shell "(which strip && find . -type f -exec strip --strip-unneeded -R .comment -R .note '{}' +) >/dev/null 2>&1 || true"
+        shell "find . -type f -exec strip --strip-unneeded -R .comment -R .note '{}' + >/dev/null 2>&1 || true"
       end
       log.info "Packing #{@target} into #{@initrd}"
       shell "find . | cpio -o -H newc | lzma -9 > #{@initrd}"
